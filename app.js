@@ -1,9 +1,11 @@
 const express = require('express')
+const expressLayouts = require('express-ejs-layouts');
 const app = express()
 const port = 3000
 
 //menggunakan ejs
 app.set('view engine', 'ejs');
+app.use(expressLayouts);
 
 app.get('/', (req, res) => {
     // res.sendFile('./index.html', {root: __dirname});
@@ -25,18 +27,23 @@ app.get('/', (req, res) => {
     {nama: 'Ringin Restu Pati', 
     title: 'Halaman HOME',
     mahasiswa,
+    layout: 'layouts/main-layout',
 });
 });
 
 app.get('/about', (req, res) => {
 //     res.send('Ini adalah halaman about')
 // res.sendFile('./about.html', {root: __dirname});
-res.render('about');
+res.render('about', {
+    layout: 'layouts/main-layout',
+    title: ' Halaman About'});
 })
 app.get('/contact', (req, res) => {
     // res.send('Ini adalah halaman contact')
     // res.sendFile('./contact.html', {root: __dirname});
-    res.render('contact');
+    res.render('contact', {
+        layout: 'layouts/main-layout',
+        title: ' Halaman Contact'});
 })
 
 app.get('/product/:id', (req,res)=>{
